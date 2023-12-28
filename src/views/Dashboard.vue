@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">
             <mini-statistics-card
-              :title="{ text: 'Today\'s Money', value: '$53k' }"
+              :title="{ text: 'Total Bs. Hoy', value: 'Bs.53k' }"
               detail="<span class='text-success text-sm font-weight-bolder'>+55%</span> than last week"
               :icon="{
                 name: 'weekend',
@@ -16,7 +16,7 @@
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <mini-statistics-card
-              :title="{ text: 'Today\'s Users', value: '2,300' }"
+              :title="{ text: 'Total Usuarios Hoy', value: '2,300' }"
               detail="<span class='text-success text-sm font-weight-bolder'>+3%</span> than last month"
               :icon="{
                 name: 'leaderboard',
@@ -27,7 +27,7 @@
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <mini-statistics-card
-              :title="{ text: 'New Clients', value: '3,462' }"
+              :title="{ text: 'Nuevos Clientes', value: '3,462' }"
               detail="<span class='text-danger text-sm font-weight-bolder'>-2%</span> than yesterday"
               :icon="{
                 name: 'person',
@@ -38,7 +38,7 @@
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <mini-statistics-card
-              :title="{ text: 'Sales', value: '$103,430' }"
+              :title="{ text: 'Ventas', value: '$103,430' }"
               detail="<span class='text-success text-sm font-weight-bolder'>+5%</span> Just updated"
               :icon="{
                 name: 'weekend',
@@ -130,9 +130,9 @@
     <div class="row">
       <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
         <project-card
-          title="Projects"
+          title="Clientes potenciales"
           description="<i class='fa fa-check text-info' aria-hidden='true'></i> <span class='font-weight-bold ms-1'>30 done</span> this month"
-          :headers="['Companies', 'Members', 'Budget', 'Progress']"
+          :headers="['Product', 'CLient', 'Budget', 'Progress']"
           :projects="[
             {
               logo: logoXD,
@@ -182,7 +182,7 @@
       <div class="col-lg-4 col-md-6">
         <timeline-list
           class="h-100"
-          title="Orders overview"
+          title="Metas"
           description="<i class='fa fa-arrow-up text-success' aria-hidden='true'></i>
         <span class='font-weight-bold'>24%</span> this month"
         >

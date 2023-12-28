@@ -3,7 +3,7 @@
   <div
     class="page-header align-items-start min-vh-100"
     style="
-      background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');
+      background-image: url('https://images.unsplash.com/photo-1626697556426-8a55a8af4999?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
     "
   >
     <span class="mask bg-gradient-dark opacity-6"></span>
@@ -72,6 +72,7 @@
                   <router-link
                     :to="{ name: 'SignUp' }"
                     class="text-success text-gradient font-weight-bold"
+                    @click="signIn"
                     >Sign up</router-link
                   >
                 </p>
@@ -85,30 +86,13 @@
       <div class="container">
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-12 col-md-6 my-auto">
-            <div class="copyright text-center text-sm text-white text-lg-start">
-              © {{ new Date().getFullYear() }}, made with
-              <i class="fa fa-heart" aria-hidden="true"></i> by
-              <a
-                href="https://www.creative-tim.com"
-                class="font-weight-bold text-white"
-                target="_blank"
-                >Creative Tim</a
-              >
-              for a better web.
-            </div>
+            
           </div>
           <div class="col-12 col-md-6">
             <ul
               class="nav nav-footer justify-content-center justify-content-lg-end"
             >
-              <li class="nav-item">
-                <a
-                  href="https://www.creative-tim.com"
-                  class="nav-link text-white"
-                  target="_blank"
-                  >Creative Tim</a
-                >
-              </li>
+               
               <li class="nav-item">
                 <a
                   href="https://www.creative-tim.com/presentation"
@@ -147,6 +131,7 @@ import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialSwitch from "@/components/MaterialSwitch.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import { mapMutations } from "vuex";
+import firebase from 'firebase' 
 
 export default {
   name: "sign-in",
@@ -166,6 +151,25 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleEveryDisplay", "toggleHideConfig"]),
+    async signIn() {
+      try {
+        // Obtén la instancia de autenticación de Firebase
+        const auth = getAuth(firebase);
+
+        const email = this.email; // suponiendo que tienes una propiedad "email" en tu data
+        const password = this.password; // suponiendo que tienes una propiedad "password" en tu data
+
+        // Iniciar sesión con correo y contraseña
+        await signInWithEmailAndPassword(auth, email, password);
+
+        // Inicio de sesión exitoso, puedes redirigir al usuario o realizar otras acciones aquí
+        console.log('Inicio de sesión exitoso');
+      } catch (error) {
+        // Manejar errores, puedes mostrar un mensaje de error o realizar otras acciones
+        console.error('Error en el inicio de sesión', error.message);
+      }
+    }
+
   },
 };
 </script>

@@ -1,0 +1,17 @@
+import { initializeApp } from 'firebase/app';
+
+// Configuración de tu aplicación Firebase
+const firebaseConfig = {
+  apiKey: 'AIzaSyAUlZzBFSW4FqTNY-kvYoHylCytEkuT07U',
+  authDomain: 'arritmo-personal.firebaseapp.com',
+  projectId: 'arritmo-personal',
+  storageBucket: 'arritmo-personal.appspot.com',
+  messagingSenderId: '801394385555',
+  appId: '1:801394385555:web:2ffbcd33fce376451e2366',
+};
+
+// Inicializar Firebase
+const app = initializeApp(firebaseConfig);
+
+// Exportar la configuración de Firebase
+export default app;

@@ -21,12 +21,7 @@
               >
                 <div
                   class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
-                  :style="{
-                    backgroundImage:
-                      'url(' +
-                      require('@/assets/img/illustrations/illustration-signin.jpg') +
-                      ')',
-                  }"
+                  style=" background-image: url('https://media.istockphoto.com/id/1298240570/es/foto/nueces-mixtas-sin-sal-alimentos-saludables.jpg?s=2048x2048&w=is&k=20&c=bVb_4L_jGYztVHAFhinuaC8sPEUoJYg1zW_OMOU-dLk=')" 
                 ></div>
               </div>
               <div
@@ -34,9 +29,9 @@
               >
                 <div class="card card-plain">
                   <div class="pb-0 card-header bg-transparent mb-4">
-                    <h4 class="font-weight-bolder">Sign In</h4>
+                    <h4 class="font-weight-bolder">Registro clientes</h4>
                     <p class="mb-0">
-                      Enter your email and password to register
+                      Ingresa tu correo y contraseña para registrarte
                     </p>
                   </div>
                   <div class="card-body">
@@ -119,6 +114,7 @@ import MaterialCheckbox from "@/components/MaterialCheckbox.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import { mapMutations } from "vuex";
+import firebase from 'firebase'
 
 export default {
   name: "sign-up",
@@ -141,5 +137,8 @@ export default {
   methods: {
     ...mapMutations(["toggleEveryDisplay", "toggleHideConfig"]),
   },
+  register(){
+
+  }
 };
 </script>
