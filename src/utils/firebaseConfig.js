@@ -1,7 +1,9 @@
 import { initializeApp } from 'firebase/app';
+ 
+import { getAuth } from 'firebase/auth';
 
 // Configuración de tu aplicación Firebase
-const firebaseConfig = {
+var firebaseConfig = {
   apiKey: 'AIzaSyAUlZzBFSW4FqTNY-kvYoHylCytEkuT07U',
   authDomain: 'arritmo-personal.firebaseapp.com',
   projectId: 'arritmo-personal',
@@ -12,6 +14,6 @@ const firebaseConfig = {
 
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-
+const auth = getAuth(app); 
 // Exportar la configuración de Firebase
-export default app;
+export { auth }

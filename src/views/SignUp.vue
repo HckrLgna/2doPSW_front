@@ -114,7 +114,7 @@ import MaterialCheckbox from "@/components/MaterialCheckbox.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import { mapMutations } from "vuex";
-import firebase from 'firebase'
+ 
 
 export default {
   name: "sign-up",

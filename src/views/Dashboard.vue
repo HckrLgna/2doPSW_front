@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">
             <mini-statistics-card
-              :title="{ text: 'Total Bs. Hoy', value: 'Bs.53k' }"
+              :title="{ text: 'Total Produccion. Hoy', value: 'TN.53k' }"
               detail="<span class='text-success text-sm font-weight-bolder'>+55%</span> than last week"
               :icon="{
                 name: 'weekend',
@@ -16,7 +16,7 @@
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <mini-statistics-card
-              :title="{ text: 'Total Usuarios Hoy', value: '2,300' }"
+              :title="{ text: 'Total Productos', value: totalProductos }"
               detail="<span class='text-success text-sm font-weight-bolder'>+3%</span> than last month"
               :icon="{
                 name: 'leaderboard',
@@ -27,7 +27,7 @@
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <mini-statistics-card
-              :title="{ text: 'Nuevos Clientes', value: '3,462' }"
+              :title="{ text: 'Total Clientes', value:  totalClientes }"
               detail="<span class='text-danger text-sm font-weight-bolder'>-2%</span> than yesterday"
               :icon="{
                 name: 'person',
@@ -51,7 +51,7 @@
         <div class="row mt-4">
           <div class="col-lg-4 col-md-6 mt-4">
             <chart-holder-card
-              title="Website Views"
+              title="Produccion diaria"
               subtitle="Last Campaign Performance"
               update="campaign sent 2 days ago"
             >
@@ -132,46 +132,46 @@
         <project-card
           title="Clientes potenciales"
           description="<i class='fa fa-check text-info' aria-hidden='true'></i> <span class='font-weight-bold ms-1'>30 done</span> this month"
-          :headers="['Product', 'CLient', 'Budget', 'Progress']"
+          :headers="['Producto', 'CLiente', 'Monto', 'Progreso']"
           :projects="[
             {
               logo: logoXD,
-              title: 'Material XD Material XD Version',
+              title: 'Almendras: ',
               members: [team1, team2, team3, team4],
               budget: '$14,000',
               progress: { percentage: 60, color: 'info' },
             },
             {
               logo: logoAtlassian,
-              title: 'Add Progress Track',
+              title: 'Anacardos',
               members: [team2, team4],
               budget: '$3,000',
               progress: { percentage: 10, color: 'info' },
             },
             {
               logo: logoSlack,
-              title: 'Fix Platform Errors',
+              title: 'Avellanas',
               members: [team3, team1],
               budget: 'Not set',
               progress: { percentage: 100, color: 'success' },
             },
             {
               logo: logoSpotify,
-              title: 'Launch our Mobile App',
+              title: 'Macadamias',
               members: [team4, team3, team4, team1],
               budget: '$20,500',
               progress: { percentage: 100, color: 'success' },
             },
             {
               logo: logoJira,
-              title: 'Add the New Pricing Page',
+              title: 'Nueces',
               members: [team4],
               budget: '$500',
               progress: { percentage: 25, color: 'info' },
             },
             {
               logo: logoJira,
-              title: 'Redesign New Online Shop',
+              title: 'Pistachos',
               members: [team1, team4],
               budget: '$2,000',
               progress: { percentage: 40, color: 'info' },
@@ -250,6 +250,7 @@ import team1 from "@/assets/img/team-1.jpg";
 import team2 from "@/assets/img/team-2.jpg";
 import team3 from "@/assets/img/team-3.jpg";
 import team4 from "@/assets/img/team-4.jpg";
+import axios from "axios";
 export default {
   name: "dashboard-default",
   data() {
@@ -264,6 +265,8 @@ export default {
       logoSpotify,
       logoJira,
       logoInvision,
+      totalClientes: 0,
+      totalProductos: 0,
     };
   },
   components: {
@@ -275,5 +278,23 @@ export default {
     TimelineList,
     TimelineItem,
   },
+  mounted(){
+    axios.get('http://52.91.91.216/api/cliente')
+      .then(response=>{
+        this.totalClientes = response.data.data.length
+        console.log(this.totalClientes);
+      })
+      .catch( error =>{
+        console.log(error);
+      })
+    axios.get('http://52.91.91.216/api/producto')
+      .then(response=>{
+        this.totalProductos = response.data.data.length
+        console.log(this.totalProductos);
+      })
+      .catch( error =>{
+        console.log(error);
+      })
+  }
 };
 </script>

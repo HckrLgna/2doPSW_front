@@ -39,7 +39,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                
+                  <tr v-for="cliente in paginatedItems" :key="cliente.id">
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div>
@@ -50,240 +51,25 @@
                           />
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">John Michael</h6>
+                          <h6 class="mb-0 text-sm">{{ cliente.nombre }}</h6>
                           <p class="text-xs text-secondary mb-0">
-                            john@creative-tim.com
+                            {{ cliente.email }}
                           </p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <p class="text-xs font-weight-bold mb-0">Manager</p>
-                      <p class="text-xs text-secondary mb-0">Organization</p>
+                      <p class="text-xs font-weight-bold mb-0">{{ cliente.funcion }}</p>
+                      <p class="text-xs text-secondary mb-0">{{cliente.cargo}}</p>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-success"
-                        >Online</span
+                      <span :class="{'badge': true, 'badge-sm': true, 'bg-gradient-success': cliente.estatus, 'bg-gradient-danger': !cliente.estatus}"
+                        >{{cliente.estatus ? 'ACtivo' : 'Inactivo' }}</span
                       >
                     </td>
                     <td class="align-middle text-center">
                       <span class="text-secondary text-xs font-weight-bold"
-                        >23/04/18</span
-                      >
-                    </td>
-                    <td class="align-middle">
-                      <a
-                        href="javascript:;"
-                        class="text-secondary font-weight-bold text-xs"
-                        data-toggle="tooltip"
-                        data-original-title="Edit user"
-                      >
-                        Edit
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img
-                            src="../assets/img/team-3.jpg"
-                            class="avatar avatar-sm me-3 border-radius-lg"
-                            alt="user2"
-                          />
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                          <p class="text-xs text-secondary mb-0">
-                            alexa@creative-tim.com
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">Programator</p>
-                      <p class="text-xs text-secondary mb-0">Developer</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-secondary"
-                        >Offline</span
-                      >
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold"
-                        >11/01/19</span
-                      >
-                    </td>
-                    <td class="align-middle">
-                      <a
-                        href="javascript:;"
-                        class="text-secondary font-weight-bold text-xs"
-                        data-toggle="tooltip"
-                        data-original-title="Edit user"
-                      >
-                        Edit
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img
-                            src="../assets/img/team-4.jpg"
-                            class="avatar avatar-sm me-3 border-radius-lg"
-                            alt="user3"
-                          />
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                          <p class="text-xs text-secondary mb-0">
-                            laurent@creative-tim.com
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">Executive</p>
-                      <p class="text-xs text-secondary mb-0">Producto</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-success"
-                        >Online</span
-                      >
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold"
-                        >19/09/17</span
-                      >
-                    </td>
-                    <td class="align-middle">
-                      <a
-                        href="javascript:;"
-                        class="text-secondary font-weight-bold text-xs"
-                        data-toggle="tooltip"
-                        data-original-title="Edit user"
-                      >
-                        Edit
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img
-                            src="../assets/img/team-3.jpg"
-                            class="avatar avatar-sm me-3 border-radius-lg"
-                            alt="user4"
-                          />
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Michael Levi</h6>
-                          <p class="text-xs text-secondary mb-0">
-                            michael@creative-tim.com
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">Programator</p>
-                      <p class="text-xs text-secondary mb-0">Developer</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-success"
-                        >Online</span
-                      >
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold"
-                        >24/12/08</span
-                      >
-                    </td>
-                    <td class="align-middle">
-                      <a
-                        href="javascript:;"
-                        class="text-secondary font-weight-bold text-xs"
-                        data-toggle="tooltip"
-                        data-original-title="Edit user"
-                      >
-                        Edit
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img
-                            src="../assets/img/team-2.jpg"
-                            class="avatar avatar-sm me-3 border-radius-lg"
-                            alt="user5"
-                          />
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Richard Gran</h6>
-                          <p class="text-xs text-secondary mb-0">
-                            richard@creative-tim.com
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">Manager</p>
-                      <p class="text-xs text-secondary mb-0">Executive</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-secondary"
-                        >Offline</span
-                      >
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold"
-                        >04/10/21</span
-                      >
-                    </td>
-                    <td class="align-middle">
-                      <a
-                        href="javascript:;"
-                        class="text-secondary font-weight-bold text-xs"
-                        data-toggle="tooltip"
-                        data-original-title="Edit user"
-                      >
-                        Edit
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img
-                            src="../assets/img/team-4.jpg"
-                            class="avatar avatar-sm me-3 border-radius-lg"
-                            alt="user6"
-                          />
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                          <p class="text-xs text-secondary mb-0">
-                            miriam@creative-tim.com
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-xs font-weight-bold mb-0">Programator</p>
-                      <p class="text-xs text-secondary mb-0">Developer</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="badge badge-sm bg-gradient-secondary"
-                        >Offline</span
-                      >
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold"
-                        >14/09/20</span
+                        >{{cliente.fecha_inicio}}</span
                       >
                     </td>
                     <td class="align-middle">
@@ -299,6 +85,11 @@
                   </tr>
                 </tbody>
               </table>
+              <nav class="p-3">
+                <button @click="prevPage" :disabled="currentPage === 1" :class="{'badge': true, 'badge-sm': true, 'bg-gradient-success': currentPage !== 1, 'bg-gradient-secondary': currentPage === 1}" >Anterior</button>
+                <span class="mx-3">{{ currentPage }} / {{ pageCount }}</span>
+                <button @click="nextPage" :disabled="currentPage === pageCount" :class="{'badge': true, 'badge-sm': true, 'bg-gradient-secondary': currentPage === pageCount, 'bg-gradient-success': currentPage !== pageCount}" >Siguiente</button>
+              </nav>
             </div>
           </div>
         </div>
@@ -324,29 +115,27 @@
                     <th
                       class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
-                      Project
+                      Producto
                     </th>
                     <th
                       class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                     >
-                      Budget
+                      Precio unitario
                     </th>
                     <th
                       class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                     >
-                      Status
+                      Estado
                     </th>
                     <th
                       class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2"
                     >
-                      Completion
+                      Porcentaje examen de calidad
                     </th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                 
-
                   <tr v-for="producto in productos.data " :key="producto.id">
                     <td>
                       <div class="d-flex px-2">
@@ -369,7 +158,8 @@
                     </td>
                     <td>
                       <!-- Puedes mostrar el estado del producto aquí -->
-                      <span class="text-xs font-weight-bold">{{ producto.activo }}</span>
+
+                      <span class="text-xs font-weight-bold"> {{ producto.activo ? 'Activo' : 'Inactivo' }} </span>
                     </td>
                     <td class="align-middle text-center">
                       <div
@@ -414,10 +204,24 @@
 import axios from 'axios';
 export default {
   name: "tables",
+ 
   data() {
     return {
-      productos: [], // Aquí almacenaremos los productos obtenidos de la API
+      productos: [],
+      clientes: [], // Aquí almacenaremos los productos obtenidos de la API
+      itemsPerPage: 5, // Número de elementos por página
+      currentPage: 1, // Página actual
     };
+  },
+  computed: {
+    pageCount() {
+      return Math.ceil(this.clientes.length / this.itemsPerPage);
+    },
+    paginatedItems() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.clientes.slice(startIndex, endIndex);
+    },
   },
   mounted() {
     // Realizar la solicitud HTTP al endpoint de productos al cargar el componente
@@ -430,6 +234,28 @@ export default {
       .catch(error => {
         console.error('Error al obtener productos:', error);
       });
+    axios.get('http://52.91.91.216/api/cliente')
+      .then(response => {
+        // Almacenar los productos en el arreglo de productos
+        this.clientes = response.data.data;
+        console.log('Clientes:', this.clientes)
+      })
+      .catch(error => {
+        console.error('Error al obtener clientes:', error);
+      });
+    
+  },
+  methods: {
+    nextPage() {
+      if (this.currentPage < this.pageCount) {
+        this.currentPage++;
+      }
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
   },
 
 };

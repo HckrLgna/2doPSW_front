@@ -131,7 +131,7 @@ import MaterialInput from "@/components/MaterialInput.vue";
 import MaterialSwitch from "@/components/MaterialSwitch.vue";
 import MaterialButton from "@/components/MaterialButton.vue";
 import { mapMutations } from "vuex";
-import firebase from 'firebase' 
+
 
 export default {
   name: "sign-in",
@@ -151,24 +151,7 @@ export default {
   },
   methods: {
     ...mapMutations(["toggleEveryDisplay", "toggleHideConfig"]),
-    async signIn() {
-      try {
-        // Obtén la instancia de autenticación de Firebase
-        const auth = getAuth(firebase);
-
-        const email = this.email; // suponiendo que tienes una propiedad "email" en tu data
-        const password = this.password; // suponiendo que tienes una propiedad "password" en tu data
-
-        // Iniciar sesión con correo y contraseña
-        await signInWithEmailAndPassword(auth, email, password);
-
-        // Inicio de sesión exitoso, puedes redirigir al usuario o realizar otras acciones aquí
-        console.log('Inicio de sesión exitoso');
-      } catch (error) {
-        // Manejar errores, puedes mostrar un mensaje de error o realizar otras acciones
-        console.error('Error en el inicio de sesión', error.message);
-      }
-    }
+    
 
   },
 };

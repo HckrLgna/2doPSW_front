@@ -7,6 +7,7 @@ import Notifications from "../views/Notifications.vue";
 import Profile from "../views/Profile.vue";
 import SignIn from "../views/SignIn.vue";
 import SignUp from "../views/SignUp.vue";
+import DocumentTable from "../views/DocumentTable.vue";
 
 const routes = [
   {
@@ -23,6 +24,11 @@ const routes = [
     path: "/tables",
     name: "Tables",
     component: Tables,
+  },
+  {
+    path: "/document-tables",
+    name: "DocumentTables",
+    component: DocumentTable,
   },
   {
     path: "/billing",

@@ -5,9 +5,12 @@ import router from "./router";
 import "./assets/css/nucleo-icons.css";
 import "./assets/css/nucleo-svg.css";
 import MaterialDashboard from "./material-dashboard";
+import { auth } from '@/utils/firebaseConfig';
 
 const appInstance = createApp(App);
 appInstance.use(store);
 appInstance.use(router);
 appInstance.use(MaterialDashboard);
+appInstance.config.globalProperties.$auth = auth;
 appInstance.mount("#app");
+
