@@ -247,7 +247,7 @@ export default {
     TimelineItem,
   },
   mounted() {
-    axios.get('http://52.91.91.216/api/cliente')
+    axios.get('https://backend-gestion-bi.vercel.app/cliente')
       .then(response=>{
         this.arrayClientes = response.data.data;
         this.totalClientes = this.arrayClientes.length
@@ -264,7 +264,7 @@ export default {
       .catch( error =>{
         console.log(error);
       })
-    axios.get('http://52.91.91.216/api/producto')
+    axios.get('https://backend-gestion-bi.vercel.app/producto')
       .then(response=>{
         this.totalProductos = response.data.data.length
          
