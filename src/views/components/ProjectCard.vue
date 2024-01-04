@@ -63,7 +63,7 @@
             <tr
               v-for="(
                 {
-                  logo,
+                   
                   title,
                   members,
                   budget,
@@ -75,9 +75,7 @@
             >
               <td>
                 <div class="d-flex px-2 py-1">
-                  <div>
-                    <img :src="logo" class="avatar avatar-sm me-3" alt="Logo" />
-                  </div>
+                   
                   <div class="d-flex flex-column justify-content-center">
                     <h6 class="mb-0 text-sm">{{ title }}</h6>
                   </div>

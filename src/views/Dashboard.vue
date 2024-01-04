@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">
             <mini-statistics-card
-              :title="{ text: 'Total Produccion. Hoy', value: 'TN.53k' }"
+              :title="{ text: 'Total Produccion. Hoy', value: 'Tn.'+ totalProduccion }"
               detail="<span class='text-success text-sm font-weight-bolder'>+55%</span> than last week"
               :icon="{
                 name: 'weekend',
@@ -38,7 +38,7 @@
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
             <mini-statistics-card
-              :title="{ text: 'Ventas', value: '$103,430' }"
+              :title="{ text: 'Ventas', value: 'Bs.'+totalVentas }"
               detail="<span class='text-success text-sm font-weight-bolder'>+5%</span> Just updated"
               :icon="{
                 name: 'weekend',
@@ -50,53 +50,26 @@
         </div>
         <div class="row mt-4">
           <div class="col-lg-4 col-md-6 mt-4">
-            <chart-holder-card
-              title="Produccion diaria"
-              subtitle="Last Campaign Performance"
-              update="campaign sent 2 days ago"
-            >
-              <reports-bar-chart
-                :chart="{
-                  labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-                  datasets: {
-                    label: 'Sales',
-                    data: [50, 20, 10, 22, 50, 10, 40],
-                  },
-                }"
-              />
+            <chart-holder-card title="Produccion diaria" subtitle="Produccion por dia" update="campaign sent 2 days ago">
+              <reports-bar-chart v-if="listaProduccion.length > 0" :chart="{ labels: listaDias, datasets: { label: 'cantidad', data: listaProduccion } }" />
+              <div v-else>Loading...</div>
             </chart-holder-card>
           </div>
           <div class="col-lg-4 col-md-6 mt-4">
             <chart-holder-card
-              title="Daily Sales"
+              title="Ventas por mes"
               subtitle="(<span class='font-weight-bolder'>+15%</span>) increase in today sales."
-              update="updated 4 min ago"
+              update="utlimos 9 meses"
               color="success"
             >
-              <reports-line-chart
-                :chart="{
-                  labels: [
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec',
-                  ],
-                  datasets: {
-                    label: 'Mobile apps',
-                    data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-                  },
-                }"
+              <reports-line-chart v-if="listaVentas.length > 0" :chart="{ labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep'], datasets: { label: 'cantidad', data: listaVentas } }" />
+                <div v-else>Loading...</div>
               />
             </chart-holder-card>
           </div>
           <div class="col-lg-4 mt-4">
             <chart-holder-card
-              title="Completed Tasks"
+              title="Retencion de clientes por mes"
               subtitle="Last Campaign Performance"
               update="just updated"
               color="dark"
@@ -116,8 +89,8 @@
                     'Dec',
                   ],
                   datasets: {
-                    label: 'Mobile apps',
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                    label: 'registro',
+                    data: listaClientes,
                   },
                 }"
               />
@@ -182,51 +155,35 @@
       <div class="col-lg-4 col-md-6">
         <timeline-list
           class="h-100"
-          title="Metas"
+          title="KPIs"
           description="<i class='fa fa-arrow-up text-success' aria-hidden='true'></i>
-        <span class='font-weight-bold'>24%</span> this month"
+        <span class='font-weight-bold'>24%</span> este mes"
         >
           <timeline-item
             :icon="{
               component: 'notifications',
               class: 'text-success',
             }"
-            title="$2400 Design changes"
-            date-time="22 DEC 7:20 PM"
+            title="Tasa de Retención de Clientes:"
+            date-time="Porcentaje de clientes que realizan compras repetidas."
           />
           <TimelineItem
             :icon="{
               component: 'code',
               class: 'text-danger',
             }"
-            title="New order #1832412"
-            date-time="21 DEC 11 PM"
+            title="Ingresos por Producto:"
+            date-time="Ingresos generados por cada tipo de producto seco."
           />
           <TimelineItem
             :icon="{
               component: 'shopping_cart',
               class: 'text-info',
             }"
-            title="Server payments for April"
-            date-time="21 DEC 9:34 PM"
+            title="Volumen de Ventas:"
+            date-time="Cantidad total de productos secos vendidos en un período específico"
           />
-          <TimelineItem
-            :icon="{
-              component: 'credit_card',
-              class: 'text-warning',
-            }"
-            title="New card added for order #4395133"
-            date-time="20 DEC 2:20 AM"
-          />
-          <TimelineItem
-            :icon="{
-              component: 'vpn_key',
-              class: 'text-primary',
-            }"
-            title="Unlock packages for development"
-            date-time="18 DEC 4:54 AM"
-            class="pb-1"
-          />
+          
         </timeline-list>
       </div>
     </div>
@@ -251,6 +208,10 @@ import team2 from "@/assets/img/team-2.jpg";
 import team3 from "@/assets/img/team-3.jpg";
 import team4 from "@/assets/img/team-4.jpg";
 import axios from "axios";
+import { db } from "../utils/firebaseConfig";
+import { getDocs, collection  } from "firebase/firestore";
+//import { ref, onUnmounted } from "vue";
+
 export default {
   name: "dashboard-default",
   data() {
@@ -267,6 +228,13 @@ export default {
       logoInvision,
       totalClientes: 0,
       totalProductos: 0,
+      totalVentas: 0,
+      totalProduccion: 0,
+      arrayClientes: [],
+      listaVentas: [0,0,0,0,0,0,0,0,0],
+      listaClientes: [0,0,0,0,0,0,0,0,0],
+      listaProduccion: [0,0,0,0,0,0,0],
+      listaDias: ["L", "M", "M", "J", "V", "S", "D"]
     };
   },
   components: {
@@ -278,11 +246,20 @@ export default {
     TimelineList,
     TimelineItem,
   },
-  mounted(){
+  mounted() {
     axios.get('http://52.91.91.216/api/cliente')
       .then(response=>{
-        this.totalClientes = response.data.data.length
-        console.log(this.totalClientes);
+        this.arrayClientes = response.data.data;
+        this.totalClientes = this.arrayClientes.length
+        for (let index = 0; index < this.arrayClientes.length; index++) {
+          const fechaInicio = new Date(this.arrayClientes[index].fecha_inicio);
+          const mes = fechaInicio.getMonth() + 1; 
+
+          if(mes < 9){
+            this.listaClientes[ mes ] = this.listaClientes[ mes ] + 1;
+          }
+        }
+        console.log("listaclientes: "+this.listaClientes)
       })
       .catch( error =>{
         console.log(error);
@@ -290,11 +267,40 @@ export default {
     axios.get('http://52.91.91.216/api/producto')
       .then(response=>{
         this.totalProductos = response.data.data.length
-        console.log(this.totalProductos);
+         
       })
       .catch( error =>{
         console.log(error);
       })
+      this.getVentas();
+      this.getProduccion();
+       
+  },
+  methods: {
+    async getVentas() {
+      console.log("getVentas");
+      let ventaCollection =  await getDocs(collection(db, "ventas"));
+      ventaCollection.forEach((doc) => {
+        this.totalVentas = this.totalVentas + doc.data().monto;
+        if(doc.data().num_mes <=9){
+          this.listaVentas[ doc.data().num_mes ] = this.listaVentas[ doc.data().num_mes ] + doc.data().monto;
+        }
+        console.log(doc.id, " => ", doc.data());
+        
+      });
+      console.log(this.listaVentas);
+    },
+    async getProduccion() {
+      console.log("getProduccion");
+      let produccionCollection =  await getDocs(collection(db, "produccion"));
+      produccionCollection.forEach((doc) => {
+        this.totalProduccion = this.totalProduccion + doc.data().cantidad;
+            this.listaProduccion[ doc.data().num_dia ] = this.listaProduccion[ doc.data().num_dia ] + doc.data().cantidad;
+      });
+      console.log(this.listaProduccion);
+
+    },
+     
   }
 };
 </script>

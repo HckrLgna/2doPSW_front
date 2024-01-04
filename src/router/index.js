@@ -8,6 +8,7 @@ import Profile from "../views/Profile.vue";
 import SignIn from "../views/SignIn.vue";
 import SignUp from "../views/SignUp.vue";
 import DocumentTable from "../views/DocumentTable.vue";
+import Rekonigtion from "../views/AIRekognition.vue";
 
 const routes = [
   {
@@ -29,6 +30,11 @@ const routes = [
     path: "/document-tables",
     name: "DocumentTables",
     component: DocumentTable,
+  },,
+  {
+    path: "/rekognition",
+    name: "rekognition",
+    component: Rekonigtion,
   },
   {
     path: "/billing",

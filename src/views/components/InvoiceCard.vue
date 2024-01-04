@@ -6,9 +6,50 @@
           <h6 class="mb-0">Documentos</h6>
         </div>
         <div class="col-6 text-end">
-          <material-button color="primary" size="sm" variant="outline"
+          <material-button color="primary" size="sm" variant="outline" data-bs-toggle="modal" data-bs-target="#exampleModal"
             >Crear nuevo</material-button
           >
+           
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Crear documento</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                  <form @submit.prevent="crearDocumento">
+                    <div class="mb-3">
+                      <label for="nombre" class="form-label">Nombre del documento</label>
+                      <input type="text" class="form-control" v-model="nuevoDocumento.nombre" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="descripcion" class="form-label">Descripción</label>
+                      <textarea class="form-control" v-model="nuevoDocumento.descripcion"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="fecha_creacion" class="form-label">Fecha de creación</label>
+                      <input type="date" class="form-control" v-model="nuevoDocumento.fecha_creacion" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="version" class="form-label">Versión</label>
+                      <input type="text" class="form-control" v-model="nuevoDocumento.version" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="file" class="form-label">Archivo</label>
+                      <input type="file" class="form-control" @change="handleFileChange" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar documento</button>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                   
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -50,10 +91,42 @@ export default {
   data(){
     return{
       documentos: [],
+      nuevoDocumento: {
+        nombre: "",
+        descripcion: "",
+        fecha_creacion: "",
+        version: "",
+        file: null,
+      },
     }
   },
+  methods: {
+    crearDocumento() {
+      const formData = new FormData();
+      formData.append("nombre", this.nuevoDocumento.nombre);
+      formData.append("descripcion", this.nuevoDocumento.descripcion);
+      formData.append("fecha_creacion", this.nuevoDocumento.fecha_creacion);
+      formData.append("version", this.nuevoDocumento.version);
+      formData.append("file", this.nuevoDocumento.file);
+
+      axios.post("http://52.91.91.216/api/contrato", formData)
+        .then(response => {
+          // Manejar la respuesta, actualizar la lista de documentos, etc.
+          console.log(response.data);
+          // Cerrar el modal después de agregar el documento
+          this.$refs.modal.hide();
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    handleFileChange(event) {
+      // Manejar el cambio en el input de tipo file
+      this.nuevoDocumento.file = event.target.files[0];
+    },
+  },
   mounted(){
-    axios.get('http://52.91.91.216/api/documento')
+    axios.get('http://52.91.91.216/api/contrato')
       .then(response => {
         this.documentos=response.data.data;
       })

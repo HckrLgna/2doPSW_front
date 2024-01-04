@@ -7,7 +7,7 @@
               <div
                 class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3"
               >
-                <h6 class="text-white text-capitalize ps-3">Contratos</h6>
+                <h6 class="text-white text-capitalize ps-3">Gestion documental</h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
