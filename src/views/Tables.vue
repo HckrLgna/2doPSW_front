@@ -225,7 +225,7 @@ export default {
   },
   mounted() {
     // Realizar la solicitud HTTP al endpoint de productos al cargar el componente
-    axios.get('http://52.91.91.216/api/producto')
+    axios.get('https://backend-gestion-bi.vercel.app/producto')
       .then(response => {
         // Almacenar los productos en el arreglo de productos
         this.productos = response.data;
@@ -234,7 +234,7 @@ export default {
       .catch(error => {
         console.error('Error al obtener productos:', error);
       });
-    axios.get('http://52.91.91.216/api/cliente')
+    axios.get('https://backend-gestion-bi.vercel.app/cliente')
       .then(response => {
         // Almacenar los productos en el arreglo de productos
         this.clientes = response.data.data;
