@@ -11,6 +11,9 @@
             </div>
           </div>
           <div class="card-body px-0 pb-2">
+            <material-button class="mx-3 my-2"  color="primary" size="sm" variant="outline" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              >Crear nuevo</material-button
+            >
             <div class="table-responsive p-0">
               <table class="table align-items-center mb-0">
                 <thead>
@@ -106,6 +109,46 @@
             </div>
           </div>
           <div class="card-body px-0 pb-2">
+            <material-button class="mx-3 my-2"  color="primary" size="sm" variant="outline" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              >Crear nuevo</material-button
+            >
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Crear producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body ">
+                    <form @submit.prevent="crearProducto">
+                      <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre del producto</label>
+                        <input type="text" class="form-control" v-model="nuevoProducto.nombre" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea class="form-control" v-model="nuevoProducto.descripcion"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="fecha_creacion" class="form-label">Fecha de caducidad </label>
+                        <input type="date" class="form-control" v-model="nuevoProducto.fecha_caducidad" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="version" class="form-label">precio</label>
+                        <input type="text" class="form-control" v-model="nuevoProducto.precio_unitario" required>
+                      </div>
+                       
+                      <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="table-responsive p-0">
               <table
                 class="table align-items-center justify-content-center mb-0"
@@ -202,15 +245,28 @@
 
 <script>
 import axios from 'axios';
+import MaterialButton from "@/components/MaterialButton.vue";
 export default {
   name: "tables",
- 
+  components: {
+    MaterialButton,
+  },
   data() {
     return {
       productos: [],
       clientes: [], // Aquí almacenaremos los productos obtenidos de la API
       itemsPerPage: 5, // Número de elementos por página
       currentPage: 1, // Página actual
+      nuevoProducto: {
+        nombre: "",
+        descripcion: "",
+        fecha_caducidad: "",
+        precio_unitario: 0,
+        activo: true,
+        
+      },
+       
+      
     };
   },
   computed: {
@@ -256,6 +312,25 @@ export default {
         this.currentPage--;
       }
     },
+    crearProducto(){
+      const formData = new FormData();
+      formData.append("nombre", this.nuevoProducto.nombre);
+      formData.append("descripcion", this.nuevoProducto.descripcion);
+      formData.append("fecha_creacion", this.nuevoProducto.fecha_creacion);
+      formData.append("version", this.nuevoProducto.version);
+      formData.append("file", this.nuevoProducto.file);
+      formData.append("id_usuario", 1);
+
+      axios.post('https://backend-gestion-bi.vercel.app/producto', this.nuevoProducto)
+        .then(response => {
+          // Manejar la respuesta, actualizar la lista de documentos, etc.
+          console.log(response.data);
+          // Cerrar el modal después de agregar el documento
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
   },
 
 };

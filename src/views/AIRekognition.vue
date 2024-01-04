@@ -44,7 +44,7 @@ export default{
             this.src = "https://detector-objetos-extranos-production.up.railway.app/camara_feed";
         },
         detener(){
-            this.flag = !this.flag;
+            this.flag = false;
             console.log("detener");
             
         }
