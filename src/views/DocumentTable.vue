@@ -21,7 +21,7 @@
   </template>
   
   <script>
-  import axios from 'axios';
+ 
 import InvoiceCard from './components/InvoiceCard.vue';
   export default {
      
@@ -49,24 +49,7 @@ import InvoiceCard from './components/InvoiceCard.vue';
     },
     mounted() {
       // Realizar la solicitud HTTP al endpoint de productos al cargar el componente
-      axios.get('http://52.91.91.216/api/producto')
-        .then(response => {
-          // Almacenar los productos en el arreglo de productos
-          this.productos = response.data;
-          console.log('Productos:', this.productos)
-        })
-        .catch(error => {
-          console.error('Error al obtener productos:', error);
-        });
-      axios.get('http://52.91.91.216/api/cliente')
-        .then(response => {
-          // Almacenar los productos en el arreglo de productos
-          this.clientes = response.data.data;
-          console.log('Clientes:', this.clientes)
-        })
-        .catch(error => {
-          console.error('Error al obtener clientes:', error);
-        });
+       
       
     },
     methods: {
